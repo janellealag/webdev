@@ -1,0 +1,91 @@
+<%- include('../../../templates/adminNav.ejs') -%>
+
+<div class="main">
+  <div class="btn-group">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
+      Choose Query <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="/Admin_Queries/accomodated">All patients accomodated today</a></li>
+      <li><a href="/Admin_Queries/doctors">All doctors assigned in main branch</a></li>
+      <li><a href="/Admin_Queries/transactions">Total transactions per clinic</a></li>
+    </ul>
+  </div>
+</br>
+</br>
+
+  <!-- For accomodated patients -->
+  <% if (selected == "1"){ %>
+    <h4 align="center">Accomodated patients today</h4>
+    <input type="text" id="myInput" onkeyup="pat()" placeholder="Search for names..">
+      <table id="myTable">
+        <tr class="header">
+          <th style="">Patient Name</th>
+          <th style="">Treatment</th>
+          <th style="">Doctor Name</th>
+        </tr>
+
+      </table>
+  <% } %>
+  <!-- -->
+
+  <!-- For doctors assigned -->
+
+  <% if (selected == "2"){ %>
+    <h4 align="center">Doctors assigned in main branch</h4>
+    <input type="text" id="myInput" onkeyup="pat()" placeholder="Search for names..">
+      <table id="myTable">
+        <tr class="header">
+          <th style="">Doctor Name</th>
+          <th style="">Clinic Name</th>
+          <th style="">Clinic Location</th>
+        </tr>
+
+      </table>
+  <% } %>
+  <!-- -->
+
+  <!-- For total transactions -->
+
+  <% if (selected == "3"){ %>
+      <h4 align="center">Total Transactions per Clinic</h4>
+    <input type="text" id="myInput" onkeyup="pat()" placeholder="Search for names..">
+      <table id="myTable">
+        <tr class="header">
+          <th style="">Clinic Name</th>
+          <th style="">Clinic Location</th>
+          <th style="">Total Transactions</th>
+        </tr>
+
+      </table>
+  <% } %>
+  <!-- -->
+
+
+</div>
+
+</body>
+</html>
+
+<script>
+function pat() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("patientInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("ptable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

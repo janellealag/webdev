@@ -1,0 +1,259 @@
+<%- include('../../../templates/adminNav.ejs') -%>
+
+<div class="main">
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAppointment"><span class="glyphicon glyphicon-plus"></span>&nbsp;New Appointment</button>
+
+</br>
+</br>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:10%;">No</th>
+      <th style="width:25%;">Patient Name</th>
+      <th style="width:25%;">Appointment Date</th>
+      <th style="width:25%;">Status</th>
+      <th style="width:25%;">Actions</th>
+    </tr>
+
+    <% if (re.length == 0 || re == 'undefined') { %>
+      <h5> No Appointment record </h5>
+    <% }else{ %>
+
+    <%  re.forEach(function(i){ %>
+
+        <tr>
+          <td><%=i.intAppointmentNo%></td>
+          <td><%=i.strPatientFname%>&nbsp;<%=i.strPatientMname%>&nbsp;<%=i.strPatientLname%></td>
+          <td><%=i.appointmentDate%></td>
+          <td>Active</td>
+          <td><button type="submit" data-toggle="modal" data-target="#viewTreatment" class="viewTreatment btn btn-info" data-dno="<%=i.intAppointmentNo%>" data-ddate="<%=i.appointmentDate%>" data-dpatient="<%=i.intUserID%>" data-dtreatment="<%=i.strTreatment%>">View Details</button></td>
+        </tr>
+
+    <%  }) %>
+    <% } %>
+
+
+  </table>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="addAppointment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Appointment Form</h4>
+      </div>
+
+      <form role="form" method="post" action="/admin/addAppointment">
+      <div class="modal-body">
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">Patient No</label>
+              <input type="number" class="form-control" name="patient" id="first" placeholder="">
+            </div>
+            <div class="col-xs-6">
+              <h5>Check the patient's number here</h5>
+              <button type="button" data-toggle="modal" data-target="#patient" class="btn btn-primary btn-sm">Show Patient List</button>
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">Appointment Date</label>
+              <input type="date" class="form-control" name="date" id="first" placeholder="">
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-8">
+              <label for="first">Treatment</label>
+              <input type="text" class="form-control" name="treat" id="first" placeholder="">
+            </div>
+
+          </div>
+          </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="patient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Patient List</h4>
+      </div>
+
+      <div class="modal-body">
+          <h5>Please search for patient name and copy the respective patient number. If the patient record doesn't exists, click here.  </h5>
+          <input type="text" id="patientInput" onkeyup="pat()" placeholder="Search for patient names..">
+          <table id="ptable">
+            <tr class="header">
+              <th style="width:50%;">Patient No</th>
+              <th style="width:50%;">Patient Name</th>
+
+            </tr>
+
+            <% if (ce.length == 0 || re == 'undefined') { %>
+              <h5> No Patient record </h5>
+            <% }else{ %>
+
+            <%  ce.forEach(function(i){ %>
+                <tr>
+                  <td><%=i.intUserID%></td>
+                  <td><%=i.strPatientFname%>&nbsp;<%=i.strPatientMname%>&nbsp;<%=i.strPatientLname%></td>
+                </tr>
+            <%  }) %>
+            <% } %>
+
+
+          </table>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="viewTreatment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Appointment Form</h4>
+      </div>
+
+      <form role="form" method="post" action="/admin/editAppointment">
+      <div class="modal-body">
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <input type="hidden" class="form-control" name="no" id="eno" placeholder="">
+              <label for="first">Patient No</label>
+              <input type="number" disabled class="form-control" name="patient" id="epatient" placeholder="">
+            </div>
+
+          </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">Appointment Date</label>
+              <input type="date" class="form-control" name="date" id="edate" placeholder="">
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-8">
+              <label for="first">Treatment</label>
+              <input type="text" class="form-control" name="treat" id="etreatment" placeholder="">
+            </div>
+
+          </div>
+          </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+</body>
+</html>
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
+<script>
+function pat() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("patientInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("ptable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
+<script>
+
+  $('.viewTreatment').on('click', function(){
+    $('#eno').val($(this).data('dno'))
+    $('#epatient').val($(this).data('dpatient'))
+    $('#epatient').val($(this).data('dpatient'))
+    $('#etreatment').val($(this).data('dtreatment'))
+
+  })
+</script>

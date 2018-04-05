@@ -1,0 +1,277 @@
+<%- include('../../../templates/adminNav.ejs') -%>
+
+<div class="main">
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addServices"><span class="
+glyphicon glyphicon-plus"></span>&nbsp;New Service</button>
+
+</br>
+</br>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for patient names..">
+
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:10%;">No</th>
+      <th style="width:25%;">Patient Name</th>
+      <th style="width:25%;">Service Name</th>
+      <th style="width:25%;">Service Date</th>
+      <th style="width:25%;">Actions</th>
+    </tr>
+
+    <% if (re.length == 0 || re == 'undefined') { %>
+      <h5> No service record </h5>
+    <% } else{ %>
+
+    <%  re.forEach(function(i){ %>
+
+        <tr>
+          <td><%=i.intServiceNo%></td>
+          <td></td>
+          <td></td>
+          <td>Active</td>
+          <td><button type="submit" data-toggle="modal" data-target="#viewDentist" class="viewDentist btn btn-info" data-dentistno="<%=i.intUserID%>" data-fname="<%=i.strDentistFname%>" data-mname="<%=i.strDentistMname%>" data-lname="<%=i.strDentistLname%>" data-address="<%=i.strDentistAddress%>" data-phone="<%=i.strDentistPhone%>" data-mobile="<%=i.strDentistMobile%>" data-age="<%=i.intDentistAge%>" data-gender="<%=i.strDentistGender%>" data-email="<%=i.strDentistEmail%>">View Details</button></td>
+        </tr>
+
+    <%  }) %>
+    <% } %>
+
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addDentist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Dentist Information Form</h4>
+      </div>
+      <form role="form" method="post" action="/admin/addDentist">
+      <div class="modal-body">
+
+          <input type="hidden" class="form-control" name="no" id="adentistNo" placeholder="">
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">First name</label>
+              <input type="text" class="form-control" name="fname" id="adFName" placeholder="">
+            </div>
+            <div class="col-xs-4">
+              <label for="middle">Middle name</label>
+              <input type="text" class="form-control" name="mname" id="adMName" placeholder="">
+            </div>
+              <div class="col-xs-4">
+              <label for="last">Last name</label>
+              <input type="text" class="form-control" name="lname" id="adLName" placeholder="">
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" name="address" id="adaddress" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">Phone Number</label>
+              <input type="text" class="form-control" name="phone" id="adphone" placeholder="">
+            </div>
+            <div class="col-xs-4">
+              <label for="middle">Mobile Number</label>
+              <input type="text" class="form-control" name="mobile" id="admobile" placeholder="">
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-2">
+              <label for="first">Age</label>
+              <input type="number" class="form-control" name="age" id="adage" placeholder="">
+            </div>
+            <div class="col-xs-4">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" id="adgender" class="form-control">
+                <option id="admale" value="male">Male</option>
+                <option id="adfemale" value="female">Female</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <label for="eaddress">Email Address</label>
+            <input type="email" class="form-control" name="email" id="ademail" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputFile">Choose Photo</label>
+            <input type="file" id="exampleInputFile">
+            <p class="help-block">Upload a clear, 1x1 photo of patient.</p>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">Sample Checkbox
+            </label>
+          </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="viewDentist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Dentist Information Form</h4>
+      </div>
+      <form role="form" method="post" action="/admin/editDentist">
+      <div class="modal-body">
+
+          <input type="hidden" class="form-control" name="no" id="dentistNo" placeholder="">
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">First name</label>
+              <input type="text" class="form-control" name="fname" id="dFName" placeholder="">
+            </div>
+            <div class="col-xs-4">
+              <label for="middle">Middle name</label>
+              <input type="text" class="form-control" name="mname" id="dMName" placeholder="">
+            </div>
+              <div class="col-xs-4">
+              <label for="last">Last name</label>
+              <input type="text" class="form-control" name="lname" id="dLName" placeholder="">
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" name="address" id="daddress" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">Phone Number</label>
+              <input type="text" class="form-control" name="phone" id="dphone" placeholder="">
+            </div>
+            <div class="col-xs-4">
+              <label for="middle">Mobile Number</label>
+              <input type="text" class="form-control" name="mobile" id="dmobile" placeholder="">
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-2">
+              <label for="first">Age</label>
+              <input type="number" class="form-control" name="age" id="dage" placeholder="">
+            </div>
+            <div class="col-xs-4">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" id="dgender" class="form-control">
+                <option id="dmale" value="male">Male</option>
+                <option id="dfemale" value="female">Female</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <label for="eaddress">Email Address</label>
+            <input type="email" class="form-control" name="email" id="demail" placeholder="">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputFile">Choose Photo</label>
+            <input type="file" id="exampleInputFile">
+            <p class="help-block">Upload a clear, 1x1 photo of patient.</p>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox">Sample Checkbox
+            </label>
+          </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+</body>
+</html>
+
+
+<script>
+    $('.viewDentist').on('click', function(){
+      $('#dentistNo').val($(this).data('dentistno'))
+      $('#dFName').val($(this).data('fname'))
+      $('#dMName').val($(this).data('mname'))
+      $('#dLName').val($(this).data('lname'))
+      $('#daddress').val($(this).data('address'))
+      $('#dphone').val($(this).data('phone'))
+      $('#dmobile').val($(this).data('mobile'))
+      $('#dage').val($(this).data('age'))
+      $('#demail').val($(this).data('email'))
+
+      var temp = $(this).data('gender')
+
+      if ($('#dfemale').val() == temp){
+        $('#dfemale').attr('selected','selected')
+      }
+      if ($('#dmale').val() == temp){
+        $('#dmale').attr('selected','selected')
+      }
+
+
+    })
+</script>
+
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

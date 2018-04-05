@@ -1,0 +1,61 @@
+<%- include('../../../templates/CVO-Head-Location.ejs') -%>
+
+
+ <div class="row clearfix">
+               
+                <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-blue">
+                            <h2>Transaction Records</h2>
+                        </div>
+                        <div class="body">
+
+
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Transaction No.</th>
+                                                            <th>Date</th>
+                                                            <th>Dentist</th>
+                                                            <th>Clinic Branch</th>
+                                                            <th>Official Receipt</th>
+                                                            <th>Total Amount Paid</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                        
+                                                        <tr>
+                                                            <td>0001</td>
+                                                           <td>01/23/2018</td>
+                                                           <td>Vernyl Cortez</td>
+                                                           <td>Sta. Maria, Bulacan</td>
+                                                           <td>0921</td>
+                                                           <td>999.99</td>
+                                                             
+                                                            <td>
+                                                                <div align="center">
+                                                                
+                                                                   
+                                                                     <a data-toggle="modal" data-target="#edit" ><button type="button" class="btn btn-primary waves-effect" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                        Treatment History
+                                                                    </button></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                             
+                                                    </tbody>
+                                                </table>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+                  
+             
+
+</div>
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+<%- include('../../../templates/CVO-Footer-Location.ejs') -%>

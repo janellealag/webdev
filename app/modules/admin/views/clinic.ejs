@@ -1,0 +1,184 @@
+<%- include('../../../templates/adminNav.ejs') -%>
+
+<div class="main">
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addClinic"><span class="
+glyphicon glyphicon-plus"></span>&nbsp;New Clinic</button>
+
+</br>
+</br>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for treatment..">
+
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:10%;">No</th>
+      <th style="">Clinic Name</th>
+      <th style="">Description</th>
+      <th style="">Clinic Location</th>
+      <th style="">Status</th>
+      <th style="">Actions</th>
+    </tr>
+
+    <% if (re.length == 0 || re == 'undefined'){ %>
+      <h5> No Clinic Record </h5>
+    <% }else{ %>
+
+      <% re.forEach(function(i){ %>
+        <tr>
+          <td><%=i.intClinicNo%></td>
+          <td><%=i.strClinicName%></td>
+          <td><%=i.strClinicDescription%></td>
+          <td><%=i.strClinicLocation%></td>
+          <td>
+            <% if (i.intClinicStatus == 1){ %>
+              Active
+          <%  } else { %>
+            Inactive
+          <% }%>
+          </td>
+          <td>
+            <% if (i.intClinicStatus == 1) { %>
+              <button type="submit" data-toggle="modal" data-target="#inactivate" data-dnum="<%=i.intClinicNo%>" class="inactivate btn btn-danger">Set Inactive</button></td>
+            <% } else{ %>
+              <button type="submit" data-dnum="<%=i.intClinicNo%>" data-toggle="modal" data-target="#activate" class="activate btn btn-info">Set Active</button></td>
+            <% } %>
+
+
+        </tr>
+
+      <% }) %>
+
+    <% } %>
+
+
+
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addClinic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Clinic Information Form</h4>
+      </div>
+      <div class="modal-body">
+        <form role="form" method="post" action="/admin/addClinic">
+        <div class="form-group">
+          <label for="name">Clinic Name</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea class="form-control" name="description" id="description"></textarea>
+          <!-- <input type="text" class="form-control" id="description" placeholder="Password"> -->
+        </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" class="form-control" name="location" id="location" placeholder="">
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="inactivate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/admin/inactivateClinic">
+        <input type="hidden" id="num" name="num">
+
+          <h3>Are you sure you want to inactivate the clinic?</h3>
+          <h6>Note: There are other data connected to this clinic.</h6>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+          <button type="submit" class="btn btn-danger">Inactivate</button>
+      </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="activate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/admin/activateClinic">
+        <input type="hidden" id="num2" name="num2">
+          <h3>Are you sure you want to activate the clinic?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-info">Activate</button>
+
+
+      </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+</body>
+</html>
+
+<script>
+  $('.inactivate').on('click', function(){
+    $('#num').val($(this).data('dnum'))
+
+  })
+
+  $('.activate').on('click', function(){
+    $('#num2').val($(this).data('dnum'))
+
+  })
+
+</script>
+
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

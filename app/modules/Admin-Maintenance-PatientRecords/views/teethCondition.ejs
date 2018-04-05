@@ -1,0 +1,451 @@
+<%- include('../../../templates/adminNav.ejs') -%>
+<div class="main">
+<center><h3><strong>Patient's Profile</strong></h3></center>
+
+ <table id="myTable">
+    <tr class="header">
+      <th style="width:10%;">No</th>
+      <th style="width:25%;">Patient Name</th>
+       <th style="width:25%;">Gender</th>
+       <th style="width:25%;">Birthday</th>
+      <th style="width:25%;">Address</th>
+      <th style="width:25%;">Telephone Number</th>
+      <th style="width:25%;">Mobile Number</th>
+     
+    
+    </tr>
+
+
+    <% re.forEach(function(i){ %>
+      <tr>
+        <td><%=i.intPatientNo%></td>
+        <td><%=i.strPatientFname%>&nbsp;<%=i.strPatientMname%>&nbsp;<%=i.strPatientLname%></td>
+          <td><%=i.strGender%></td>
+          <td><%=i.dtmBirthday%></td>
+          <td><%=i.strPatientAddress%></td>
+          <td><%=i.strPatientPhone%></td>
+          <td><%=i.strPatientMobile%></td>
+        
+   
+      </tr>
+    <% }); %>
+  </table>
+<hr>
+  <center><h3><strong>Teeth Condition</strong></h3><h4>(LEGENDS: 1-Okay;  2-Missing;  3-Caris;  4-Caris Mishal;  5-Caris Distal;  6-4XO)</h4></center>
+
+  <center>  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPatient" style="width:50%">&nbsp;UPDATE PATIENT'S TEETH CONDITION</button></center><br>
+   <table id="myTable">
+    <tr class="header">
+      <th >18</th>
+      <th >17</th>
+      <th >16</th>
+      <th >15</th>
+      <th >14</th>
+      <th >13</th>
+      <th >12</th>
+      <th >11</th>
+      <th >21</th>
+      <th >22</th>
+      <th >23</th>
+      <th >24</th>
+      <th >25</th>
+      <th >26</th>
+      <th >27</th>
+      <th >28</th>
+    </tr>
+
+      <tr>
+        <td>
+          <select >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+       <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+
+
+     
+
+        
+   
+      </tr>
+ 
+  </table>
+<br>
+ <table id="myTable">
+    <tr class="header">
+      <th >38</th>
+      <th >37</th>
+      <th >36</th>
+      <th >35</th>
+      <th >34</th>
+      <th >33</th>
+      <th >32</th>
+      <th >31</th>
+      <th >41</th>
+      <th >42</th>
+      <th >43</th>
+      <th >44</th>
+      <th >45</th>
+      <th >46</th>
+      <th >47</th>
+      <th >48</th>
+    </tr>
+
+      <tr>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+       <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+        <td>
+          <select>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+
+        </td>
+
+
+
+
+
+</div>
+
+</body>
+</html>
+
+

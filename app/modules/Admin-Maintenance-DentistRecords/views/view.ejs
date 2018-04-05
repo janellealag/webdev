@@ -1,0 +1,206 @@
+<%- include('../../../templates/adminNav.ejs') -%>
+
+<div class="main">
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDentist" style="width:100%"><span class="
+glyphicon glyphicon-plus"></span>&nbsp;Add Dentist</button>
+
+</br>
+</br>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+<% if (re.length == 0 || re == 'undefined') { %>
+      <h5> No dentist record </h5>
+    <% } else{ %>
+
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:10%;">No</th>
+      <th style="width:25%;">Dentist Name</th>
+      <th style="width:25%;">Gender</th>
+      <th style="width:25%;">Status</th>
+      <th style="width:25%;">Actions</th>
+    </tr>
+
+    
+    <%  re.forEach(function(i){ %>
+
+        <tr>
+          <td><%=i.intDentistNo%></td>
+          <td><%=i.strDentistFname%>&nbsp;<%=i.strDentistMname%>&nbsp;<%=i.strDentistLname%></td>
+          <td><%=i.strGender%></td>
+          <% if (i.intDentistStatus==1) { %>
+          <td>Active</td>
+          <% } else { %>
+          <td>Inactive</td>
+          <% } %>
+          <td><button type="submit" data-toggle="modal" data-target="#viewDentist" class="viewDentist btn btn-info" data-dentistno="<%=i.intUserID%>" data-fname="<%=i.strDentistFname%>" data-mname="<%=i.strDentistMname%>" data-lname="<%=i.strDentistLname%>"  data-gender="<%=i.strGender%>" >View Details</button></td>
+        </tr>
+
+    <%  }) %>
+    <% } %>
+
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addDentist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Dentist Information Form</h4>
+      </div>
+      <form role="form" method="post" action="/Admin_DentistRecord">
+      <div class="modal-body">
+
+          <input type="hidden" class="form-control" name="no" id="adentistNo" placeholder="">
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">First name</label>
+              <input type="text" class="form-control" name="fname" id="adFName" placeholder="" >
+            </div>
+            <div class="col-xs-4">
+              <label for="middle">Middle name</label>
+              <input type="text" class="form-control" name="mname" id="adMName" placeholder="">
+            </div>
+              <div class="col-xs-4">
+              <label for="last">Last name</label>
+              <input type="text" class="form-control" name="lname" id="adLName" placeholder="">
+            </div>
+          </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+          
+            <div class="col-xs-4">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" id="adgender" class="form-control">
+                <option id="admale" value="Male">Male</option>
+                <option id="adfemale" value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="viewDentist" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Dentist Information Form</h4>
+      </div>
+      <form role="form" method="post" action="/admin/editDentist">
+      <div class="modal-body">
+
+          <input type="hidden" class="form-control" name="no" id="dentistNo" placeholder="" disabled>
+          <div class="form-group">
+            <div class="row">
+            <div class="col-xs-4">
+              <label for="first">First name</label>
+              <input type="text" class="form-control" name="fname" id="dFName" placeholder="" disabled>
+            </div>
+            <div class="col-xs-4">
+              <label for="middle">Middle name</label>
+              <input type="text" class="form-control" name="mname" id="dMName" placeholder="" disabled>
+            </div>
+              <div class="col-xs-4">
+              <label for="last">Last name</label>
+              <input type="text" class="form-control" name="lname" id="dLName" placeholder="" disabled>
+            </div>
+          </div>
+          </div>
+
+
+
+          <div class="form-group">
+            <div class="row">
+           
+            <div class="col-xs-4">
+              <label for="gender">Gender</label>
+               <input type="text" class="form-control" name="gender" id="dgender" placeholder="" disabled>
+            </div>
+          </div>
+          </div>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!---<button type="submit" class="btn btn-primary">Edit</button>--->
+      </div>
+
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+</body>
+</html>
+
+
+<script>
+    $('.viewDentist').on('click', function(){
+      $('#dentistNo').val($(this).data('dentistno'))
+      $('#dFName').val($(this).data('fname'))
+      $('#dMName').val($(this).data('mname'))
+      $('#dLName').val($(this).data('lname'))
+      $('#daddress').val($(this).data('address'))
+      $('#dphone').val($(this).data('phone'))
+      $('#dmobile').val($(this).data('mobile'))
+      $('#dage').val($(this).data('age'))
+      $('#demail').val($(this).data('email'))
+       $('#dgender').val($(this).data('gender'))
+      var temp = $(this).data('gender')
+
+      if ($('#dfemale').val() == temp){
+        $('#dfemale').attr('selected','selected')
+      }
+      if ($('#dmale').val() == temp){
+        $('#dmale').attr('selected','selected')
+      }
+
+
+    })
+</script>
+
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

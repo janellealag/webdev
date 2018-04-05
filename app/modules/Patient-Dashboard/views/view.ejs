@@ -1,0 +1,82 @@
+<%- include('../../../templates/CVO-Head-Location.ejs') -%>
+
+
+ <div class="row clearfix">
+               
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-blue">
+                            <h2>My Teeth</h2>
+                        </div>
+                        <div class="body"><center>
+                             <img src="../../images/image-gallery/top-teeth.png" width="59%"/>
+                             <img src="../../images/image-gallery/bottom-teeth.png" width="59%"/>
+                             </center>
+                        </div>
+                    </div>
+                </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-blue">
+                            <h2>My Profile</h2>
+                            <strong></strong>
+                        </div>
+                        <div class="body">
+                        <% re.forEach(function(i){ %>
+                            <label class="form-label">ID</label>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name" required="" aria-required="true" disabled value="<%= i.intPatientNo %>">
+                                    </div>
+                                </div>
+
+                                <label class="form-label">Name</label>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name" required="" aria-required="true" disabled value="<%= i.strPatientFname%> <%= i.strPatientMname%> <%= i.strPatientLname%>">
+                                    </div>
+                                </div>
+                                <label class="form-label">Gender</label>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name" required="" aria-required="true" disabled value="<%= i.strGender%>">
+                                    </div>
+                                </div>
+                                <label class="form-label">Address</label>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name" required="" aria-required="true" disabled value="<%= i.strPatientAddress%>">
+                                    </div>
+                                </div>
+                                <label class="form-label">Telephone Number</label>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name" required="" aria-required="true" disabled value="<%= i.strPatientPhone%>">
+                                    </div>
+                                </div>
+                                <label class="form-label">Mobile Number</label>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name" required="" aria-required="true" disabled
+                                        value="<%= i.strPatientMobile%>">
+                                    </div>
+                                </div>
+                                <label class="form-label">Birthday</label>
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="name" required="" aria-required="true" disabled value="<%= i.dtmBirthday%>">
+                                    </div>
+                                </div>
+                                <% }); %>
+                        </div>
+                    </div>
+                </div>
+             
+				
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <script src="../../plugins/ckeditor/ckeditor.js"></script>
+    <script src="../../js/pages/forms/editors.js"></script>
+
+
+
+<%- include('../../../templates/CVO-Footer-Location.ejs') -%>
